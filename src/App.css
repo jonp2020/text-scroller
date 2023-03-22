@@ -1,0 +1,68 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.inputLabel {
+  margin: 0.5rem 0.5rem 0 1rem;
+}
+
+.scroll-section {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.scrolling-container {
+  margin-top: 1rem;
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 1rem 0 1rem;
+}
+
+.appInfo {
+  text-align: left;
+}
+
+.wrapper {
+  display: relative;
+}
+
+.text {
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  min-width: 0;
+  justify-self: center;
+  /* animation: smoothTextScroll 4s infinite; */
+
+  /* animation: smoothTextScroll 10s linear infinite; */
+  position: relative;
+}
+
+.textSpan {
+  /* margin: 0.75rem; */
+}
+.textItem {
+  /* animation: smoothTextScroll 10s linear infinite;
+  position: absolute; */
+}
+
+.whiteSpace {
+  white-space: pre-wrap;
+}
+
+@keyframes smoothTextScroll {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
