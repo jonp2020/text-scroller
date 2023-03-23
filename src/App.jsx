@@ -68,24 +68,6 @@ function App() {
     return textWithStyles;
   };
 
-  const [providedText, setProvidedText] = useState(
-    "Welcome on board this service to [B]London[/B]. Please have [U]all[/U] tickets and passes ready for inspection. This service is expected to depart [C:#00FF00]on time[/C]"
-  );
-
-  const [intervalScroller, setIntervalScroller] = useState(null);
-  const [text, setText] = useState(splitTextIntoArr);
-  const [count, setCount] = useState(0);
-  const [width, setWidth] = useState(75);
-  const [textArr, setTextArr] = useState(numOfCols);
-  const [scrollSpeed, setScrollSpeed] = useState(5);
-
-  const savedCallback = useRef();
-
-  function callback(text, count) {
-    setCount(count);
-    setTextArr(text);
-  }
-
   const handleScroll = () => {
     const newTextArr = [...textArr];
 
@@ -101,42 +83,12 @@ function App() {
     return callback(newTextArr, newCount);
   };
 
-  useEffect(() => {
-    savedCallback.current = handleScroll;
-  });
-
-  useEffect(() => {
-    const nextTick = () => {
-      savedCallback.current();
-    };
-
-    let scroller = setInterval(nextTick, scrollSpeed * 100);
-
-    setIntervalScroller(scroller);
-    return () => clearInterval(scroller);
-  }, []);
-
-  const updateScrollSpeed = (e) => {
-    clearInterval(intervalScroller);
-    setScrollSpeed(e.target.value);
-
-    const updatedNextTick = () => {
-      savedCallback.current();
-    };
-
-    let newScroller = setInterval(updatedNextTick, scrollSpeed * 100);
-
-    setIntervalScroller(newScroller);
-  };
-
   const updateWidth = (e) => {
     clearInterval(intervalScroller);
 
     const textCopy = [...text];
-
     let value = e.target.value;
 
-    console.log("val", value);
     if (isNaN(parseInt(value))) {
       value = 0;
     } else {
@@ -158,10 +110,58 @@ function App() {
       savedCallback.current();
     };
 
-    let newWidthScroller = setInterval(updatedNextTick, scrollSpeed * 100);
-
+    let newWidthScroller = setInterval(updatedNextTick, scrollSpeed * 50);
     setIntervalScroller(newWidthScroller);
   };
+
+  const updateScrollSpeed = (e) => {
+    clearInterval(intervalScroller);
+    setScrollSpeed(e.target.value);
+
+    const updatedNextTick = () => {
+      savedCallback.current();
+    };
+
+    let newScroller = setInterval(updatedNextTick, scrollSpeed * 50);
+
+    setIntervalScroller(newScroller);
+  };
+
+  // Example sentences:
+  // "Welcome on board this service to [B]London[/B]. Please have [U]all[/U] tickets and passes ready for inspection. This service is expected to depart [C:#00FF00]on time[/C]"
+
+  // "[C:#FF0000]All of this text is Red, but [C:#0000FF][B][U]THIS[/U][/B] text is Blue.[/C][/C]"
+
+  // Change the string for the providedText usesState below to display a different message
+  const [providedText, setProvidedText] = useState(
+    "Welcome on board this service to [B]London[/B]. Please have [U]all[/U] tickets and passes ready for inspection. This service is expected to depart [C:#00FF00]on time[/C]"
+  );
+  const [intervalScroller, setIntervalScroller] = useState(null);
+  const [text, setText] = useState(splitTextIntoArr);
+  const [count, setCount] = useState(0);
+  const [width, setWidth] = useState(75);
+  const [textArr, setTextArr] = useState(numOfCols);
+  const [scrollSpeed, setScrollSpeed] = useState(5);
+  const savedCallback = useRef();
+
+  function callback(text, count) {
+    setCount(count);
+    setTextArr(text);
+  }
+
+  useEffect(() => {
+    savedCallback.current = handleScroll;
+  });
+
+  useEffect(() => {
+    const nextTick = () => {
+      savedCallback.current();
+    };
+
+    let scroller = setInterval(nextTick, scrollSpeed * 50);
+    setIntervalScroller(scroller);
+    return () => clearInterval(scroller);
+  }, []);
 
   return (
     <div className="App">
@@ -172,12 +172,18 @@ function App() {
           input fields below.
         </li>
         <li>
-          Example sentence: "Welcome on board this service to [B]London[/B].
+          To change the scrolling text, currently you will need to update the
+          providedText useState in the code (App.jsx file line 136)
+        </li>
+        <li>
+          Example sentence 1: "Welcome on board this service to [B]London[/B].
           Please have [U]all[/U] tickets and passes ready for inspection. This
           service is expected to depart [C:#00FF00]on time[/C]"
         </li>
-        <li>screenWidth: 10</li>
-        <li>speed: 2</li>
+        <li>
+          Example sentence 2: "[C:#FF0000]All of this text is Red, but
+          [C:#0000FF][B][U]THIS[/U][/B] text is Blue.[/C][/C]"
+        </li>
       </ul>
 
       <label className="inputLabel" htmlFor="screenWidth">
