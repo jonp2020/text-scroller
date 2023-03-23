@@ -1,4 +1,4 @@
-# text-scroller
+# Text Scroller
 
 This app is displays a sentence as a ticker tape scroller where the text moves from right to left. It takes a string which has style tags wrapped around some words or phrases. These styles are applied when the text displays in the scroller.
 
@@ -8,13 +8,16 @@ Currently, if you want to change the text that is displayed, you will need to up
 
 It was written in React and set up using Vite.
 
-To get started:
+## To get started:
 
 - Clone this repo
 - cd into the folder where you cloned the repo 
 - In the terminal run ```npm install```
 - In the terminal run ```npm run dev```
 - Open the local url listed in terminal when you ran the command in the previous step
+
+As mentioned above, change the sentence displayed in the scroller by updating providedText useState in App.jsx line 136.
+Change the width and speed of the scroller using the input fields in the browser. 
 
 To do:
 - Add input field for user to provide their own sentence which would update the text displayed in the scroller
